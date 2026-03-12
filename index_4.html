@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Web App Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(180deg, #d8f5f6 0%, #fff0d4 40%, #c4ecee 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding-bottom: 2rem;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Hiệu ứng mờ đục cho thẻ Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <div id="loading-screen" class="hidden fixed inset-0 z-50 bg-white/40 backdrop-blur-sm flex flex-col items-center justify-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-4 border-red-600 border-t-transparent"></div>
+        <p class="mt-4 text-gray-800 font-medium">Đang đăng nhập...</p>
+    </div>
+
+    <div id="login-screen" class="max-w-md mx-auto relative overflow-hidden transition-opacity duration-300">
+        
+        <div class="pt-16 px-6 relative z-20">
+            <h1 class="text-[32px] font-normal text-gray-900 leading-tight">Xin chào,</h1>
+            <h2 class="text-[32px] font-semibold text-gray-900 leading-tight uppercase mt-1">VUONG THE TUNG</h2>
+            
+            <button id="btn-login" class="mt-6 bg-black text-white px-8 py-3 rounded-full font-medium text-base shadow-lg active:scale-95 transition-transform">
+                Đăng nhập
+            </button>
+        </div>
+
+        <div class="relative w-full h-64 -mt-4 z-10">
+            <img src="https://drive.google.com/thumbnail?id=MÃ_ID_ẢNH_CỦA_ANH_Ở_ĐÂY&sz=w1000" alt="Illustration" class="w-full h-full object-cover object-right">
+            
+            <div class="absolute bottom-4 left-4 text-center">
+                <div class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full inline-block mb-1 border border-white">NEW!</div>
+                <div class="w-14 h-14 bg-white/50 rounded-full flex items-center justify-center backdrop-blur-sm shadow-sm mx-auto">
+                    <i class="fa-solid fa-gift text-2xl text-red-500"></i>
+                </div>
+                <p class="text-red-600 font-bold text-[11px] mt-1 shadow-white" style="text-shadow: 1px 1px 2px white;">Rinh Lộc Tết Ngay</p>
+            </div>
+        </div>
+
+        <div class="px-4 relative z-30 -mt-2">
+            <div class="bg-white rounded-[24px] p-4 shadow-sm">
+                <div class="flex justify-between items-start gap-1 overflow-x-auto no-scrollbar">
+                    <div class="flex flex-col items-center w-[60px] flex-shrink-0">
+                        <div class="w-12 h-12 flex items-center justify-center text-2xl text-gray-800"><i class="fa-solid fa-wallet"></i></div>
+                        <span class="text-[11px] text-center leading-tight mt-1 text-gray-700">Tài khoản<br>& Thẻ</span>
+                    </div>
+                    <div class="flex flex-col items-center w-[60px] flex-shrink-0">
+                        <div class="w-12 h-12 flex items-center justify-center text-2xl text-gray-800"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+                        <span class="text-[11px] text-center leading-tight mt-1 text-gray-700">Chuyển tiền<br>& thanh t...</span>
+                    </div>
+                    <div class="flex flex-col items-center w-[60px] flex-shrink-0 relative">
+                        <div class="w-12 h-12 flex items-center justify-center text-3xl text-gray-800 relative">
+                            <i class="fa-solid fa-qrcode"></i>
+                            <div class="absolute w-3 h-3 bg-red-500 bottom-2 right-2 rounded-sm border-2 border-white"></div>
+                        </div>
+                        <span class="text-[11px] text-center leading-tight mt-1 text-gray-700">Quét<br>mã QR</span>
+                    </div>
+                    <div class="flex flex-col items-center w-[60px] flex-shrink-0">
+                        <div class="w-12 h-12 flex items-center justify-center text-2xl text-gray-800"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                        <span class="text-[11px] text-center leading-tight mt-1 text-gray-700">Rút tiền<br>không thẻ</span>
+                    </div>
+                    <div class="flex flex-col items-center w-[60px] flex-shrink-0">
+                        <div class="w-12 h-12 flex items-center justify-center text-2xl text-gray-800"><i class="fa-solid fa-building-columns"></i></div>
+                        <span class="text-[11px] text-center leading-tight mt-1 text-gray-700">Khám phá<br>sản phẩm</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-5">
+                    <div class="flex-1 bg-gray-50 rounded-2xl p-3 flex items-center gap-3 active:bg-gray-100">
+                        <div class="w-8 h-8 rounded-full border-2 border-gray-800 flex items-center justify-center relative">
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <div class="absolute -bottom-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center border border-white"><i class="fa-solid fa-check text-white text-[8px]"></i></div>
+                        </div>
+                        <span class="text-xs font-medium text-gray-800 leading-tight">Techcom<br>bank</span>
+                    </div>
+                    <div class="flex-1 bg-gray-50 rounded-2xl p-3 flex items-center gap-3 active:bg-gray-100">
+                        <div class="w-8 h-8 rounded-full border-2 border-gray-800 flex items-center justify-center relative">
+                            <i class="fa-solid fa-piggy-bank text-sm"></i>
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center border border-white"><i class="fa-solid fa-plus text-white text-[8px]"></i></div>
+                        </div>
+                        <span class="text-xs font-medium text-gray-800 leading-tight">Sinh lời<br>tự động</span>
+                    </div>
+                    <div class="w-[50px] bg-gray-50 rounded-2xl flex items-center justify-center active:bg-gray-100">
+                        <i class="fa-regular fa-heart text-xl text-gray-800"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-4 mt-4 relative z-30">
+            <div class="bg-white rounded-[24px] shadow-sm overflow-hidden">
+                <div class="flex items-center justify-between p-5 border-b border-gray-100 active:bg-gray-50">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-book-open text-gray-500 text-xl w-6 text-center"></i>
+                        <span class="text-[15px] font-medium text-gray-800">Hướng dẫn sử dụng</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-300 text-sm"></i>
+                </div>
+                <div class="flex items-center justify-between p-5 active:bg-gray-50">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-regular fa-window-restore text-gray-500 text-xl w-6 text-center"></i>
+                        <span class="text-[15px] font-medium text-gray-800">Cài đặt ứng dụng</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-300 text-sm"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="hidden max-w-md mx-auto relative overflow-hidden transition-opacity duration-300">
+        
+        <div class="absolute top-12 left-5 z-40">
+            <button class="w-12 h-12 bg-white rounded-full flex flex-col items-center justify-center shadow-md gap-1 active:bg-gray-100">
+                <div class="w-5 h-0.5 bg-black"></div>
+                <div class="w-5 h-0.5 bg-black"></div>
+            </button>
+        </div>
+
+        <div class="absolute top-20 right-4 left-24 glass-card rounded-2xl p-4 shadow-lg z-40">
+            <div class="flex justify-between items-start">
+                <div class="flex gap-2">
+                    <div class="mt-1 flex gap-0.5 text-red-600">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L22 12L12 22L2 12L12 2Z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-600 font-medium">Số dư hiện có</p>
+                        <p id="balance-text" class="text-[17px] font-semibold text-gray-900 leading-tight">VND **********</p>
+                    </div>
+                </div>
+                <button id="btn-toggle-balance" class="mt-1 active:scale-90">
+                    <i id="eye-icon" class="fa-regular fa-eye-slash text-xl text-black"></i>
+                </button>
+            </div>
+            
+            <div class="mt-5">
+                <h3 class="text-[17px] font-medium text-black leading-tight">Thanh toán hóa đơn bạn ơi!</h3>
+                <p class="text-[13px] text-gray-700 mt-2 leading-relaxed pr-4">Thanh toán hóa đơn điện, nước, internet...tiện lợi, nhanh chóng, không quên kỳ hạn</p>
+                <button class="mt-4 px-5 py-1.5 border border-black rounded-full text-sm font-medium text-black active:bg-gray-100 transition-colors">
+                    Thanh toán ngay
+                </button>
+            </div>
+        </div>
+
+        <div class="relative w-full h-[320px] pt-12 z-10">
+            <img src="https://drive.google.com/thumbnail?id=MÃ_ID_ẢNH_CỦA_ANH_Ở_ĐÂY&sz=w1000" alt="Illustration" class="w-full h-full object-cover object-right">
+            
+            <div class="absolute bottom-6 left-5 text-center">
+                <div class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full inline-block mb-1 border border-white">NEW!</div>
+                <div class="w-14 h-14 bg-white/50 rounded-full flex items-center justify-center backdrop-blur-sm shadow-sm mx-auto">
+                    <i class="fa-solid fa-gift text-2xl text-red-500"></i>
+                </div>
+                <p class="text-red-600 font-bold text-[11px] mt-1 shadow-white" style="text-shadow: 1px 1px 2px white;">Rinh Lộc Tết Ngay</p>
+            </div>
+        </div>
+
+        <div class="px-4 relative z-30 -mt-2">
+            <div class="bg-white rounded-[24px] p-4 shadow-sm">
+                <div class="flex justify-between items-start gap-1 overflow-x-auto no-scrollbar">
+                    <div class="flex flex-col items-center w-[60px] flex-shrink-0">
+                        <div class="w-12 h-12 flex items-center justify-center text-2xl text-gray-800"><i class="fa-solid fa-wallet"></i></div>
+                        <span class="text-[11px] text-center leading-tight mt-1 text-gray-700">Tài khoản<br>& Thẻ</span>
+                    </div>
+                    <div class="flex flex-col items-center w-[60px] flex-shrink-0">
+                        <div class="w-12 h-12 flex items-center justify-center text-2xl text-gray-800"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+                        <span class="text-[11px] text-center leading-tight mt-1 text-gray-700">Chuyển tiền<br>& thanh t...</span>
+                    </div>
+                    <div class="flex flex-col items-center w-[60px] flex-shrink-0 relative">
+                        <div class="w-12 h-12 flex items-center justify-center text-3xl text-gray-800 relative">
+                            <i class="fa-solid fa-qrcode"></i>
+                            <div class="absolute w-3 h-3 bg-red-500 bottom-2 right-2 rounded-sm border-2 border-white"></div>
+                        </div>
+                        <span class="text-[11px] text-center leading-tight mt-1 text-gray-700">Quét<br>mã QR</span>
+                    </div>
+                    <div class="flex flex-col items-center w-[60px] flex-shrink-0">
+                        <div class="w-12 h-12 flex items-center justify-center text-2xl text-gray-800"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                        <span class="text-[11px] text-center leading-tight mt-1 text-gray-700">Rút tiền<br>không thẻ</span>
+                    </div>
+                    <div class="flex flex-col items-center w-[60px] flex-shrink-0">
+                        <div class="w-12 h-12 flex items-center justify-center text-2xl text-gray-800"><i class="fa-solid fa-building-columns"></i></div>
+                        <span class="text-[11px] text-center leading-tight mt-1 text-gray-700">Khám phá<br>sản phẩm</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-5">
+                    <div class="flex-1 bg-gray-50 rounded-2xl p-3 flex items-center gap-3 active:bg-gray-100">
+                        <div class="w-8 h-8 rounded-full border-2 border-gray-800 flex items-center justify-center relative">
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <div class="absolute -bottom-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center border border-white"><i class="fa-solid fa-check text-white text-[8px]"></i></div>
+                        </div>
+                        <span class="text-xs font-medium text-gray-800 leading-tight">Techcom<br>bank</span>
+                    </div>
+                    <div class="flex-1 bg-gray-50 rounded-2xl p-3 flex items-center gap-3 active:bg-gray-100">
+                        <div class="w-8 h-8 rounded-full border-2 border-gray-800 flex items-center justify-center relative">
+                            <i class="fa-solid fa-piggy-bank text-sm"></i>
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center border border-white"><i class="fa-solid fa-plus text-white text-[8px]"></i></div>
+                        </div>
+                        <span class="text-xs font-medium text-gray-800 leading-tight">Sinh lời<br>tự động</span>
+                    </div>
+                    <div class="w-[50px] bg-gray-50 rounded-2xl flex items-center justify-center active:bg-gray-100">
+                        <i class="fa-regular fa-heart text-xl text-gray-800"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-4 mt-4 relative z-30">
+            <div class="bg-white rounded-[24px] shadow-sm overflow-hidden p-6 flex items-center justify-between active:bg-gray-50">
+                <span class="text-[17px] font-medium text-gray-900">Ngày hội trả góp Inspire:</span>
+                <div class="w-6 h-6 border border-blue-500 rounded-sm flex items-center justify-center">
+                    <i class="fa-solid fa-info text-blue-500 text-xs"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isBalanceHidden = true;
+        let actualBalance = "Đang tải...";
+        let balanceTimeout;
+        
+        const balanceText = document.getElementById('balance-text');
+        const eyeIcon = document.getElementById('eye-icon');
+        const btnToggleBalance = document.getElementById('btn-toggle-balance');
+
+        async function fetchBalanceFromSheet() {
+            const sheetId = '16aGynCPWgxCFmwKmpFfOwDLJET1RYE0kdDHT6u4j5II';
+            const sheetName = 'Số dư';
+            const range = 'A1';
+            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}&range=${range}`;
+
+            try {
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`Mã lỗi mạng: ${response.status}`);
+                }
+                
+                const data = await response.text();
+                
+                // Nếu dữ liệu trả về là một trang web (HTML) thay vì một con số -> File chưa được public
+                if (data.toLowerCase().includes("<!doctype html>") || data.toLowerCase().includes("<html")) {
+                    actualBalance = "Lỗi: File chưa Public";
+                    console.error("Lỗi: Google Sheet chưa được mở quyền chia sẻ 'Bất kỳ ai có đường liên kết'.");
+                    return;
+                }
+
+                // Loại bỏ dấu ngoặc kép và khoảng trắng thừa
+                actualBalance = data.replace(/"/g, '').trim();
+                
+                // Nếu ô A1 trống
+                if (!actualBalance) {
+                    actualBalance = "Lỗi: Ô A1 trống";
+                }
+
+            } catch (error) {
+                console.error("Lỗi khi tải số dư:", error);
+                actualBalance = "Lỗi kết nối mạng/CORS";
+            }
+        }
+
+        document.getElementById('btn-login').addEventListener('click', function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.classList.remove('hidden');
+
+            fetchBalanceFromSheet();
+
+            setTimeout(function() {
+                loadingScreen.classList.add('hidden');
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('dashboard-screen').classList.remove('hidden');
+            }, 3000); 
+        });
+
+        btnToggleBalance.addEventListener('click', function() {
+            isBalanceHidden = !isBalanceHidden;
+            
+            clearTimeout(balanceTimeout);
+            
+            if (isBalanceHidden) {
+                balanceText.innerText = "VND **********";
+                eyeIcon.className = "fa-regular fa-eye-slash text-xl text-black";
+            } else {
+                eyeIcon.className = "fa-regular fa-eye text-xl text-black";
+                balanceText.innerText = "VND Đang tải...";
+                
+                balanceTimeout = setTimeout(function() {
+                    if (!isBalanceHidden) {
+                        // Nếu giá trị có chứa chữ "Lỗi", không thêm chữ "VND " vào trước
+                        if (actualBalance.includes("Lỗi")) {
+                            balanceText.innerText = actualBalance;
+                            balanceText.classList.add("text-red-500", "text-sm"); // Đổi màu đỏ cho dễ nhìn
+                        } else {
+                            balanceText.innerText = "VND " + actualBalance;
+                            balanceText.classList.remove("text-red-500", "text-sm");
+                        }
+                    }
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
